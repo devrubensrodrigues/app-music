@@ -1,5 +1,7 @@
 package br.com.appMusic.principal;
 
+import br.com.appMusic.model.enums.TipoArtista;
+
 import java.util.Scanner;
 
 public class Principal {
@@ -17,6 +19,8 @@ public class Principal {
                 """);
 
         int opcao = sc.nextInt();
+        sc.nextLine();
+
         while(opcao != 9) {
             switch (opcao) {
                 case 1:
@@ -59,5 +63,15 @@ public class Principal {
     }
 
     private void cadastrasArtista() {
+        String opcaoEscolhida = "s";
+
+        while(opcaoEscolhida.equals("s")) {
+            System.out.print("Qual o nome do artista? ");
+            String nomeArtista = sc.nextLine();
+            System.out.print("Informe o tipo do artista(SOLO/DUPLA/BANDA): ");
+            TipoArtista tipo = TipoArtista.valueOf(sc.nextLine().toUpperCase());
+            System.out.print("Cadastrar outro artista?(s/n): ");
+            opcaoEscolhida = sc.nextLine();
+        }
     }
 }

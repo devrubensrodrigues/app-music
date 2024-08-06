@@ -1,10 +1,6 @@
 package br.com.appMusic.model;
 
-import br.com.appMusic.model.enums.TipoArtista;
 import jakarta.persistence.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "musicas")
