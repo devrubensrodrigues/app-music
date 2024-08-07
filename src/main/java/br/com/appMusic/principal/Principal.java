@@ -1,11 +1,18 @@
 package br.com.appMusic.principal;
 
+import br.com.appMusic.model.Artista;
 import br.com.appMusic.model.enums.TipoArtista;
+import br.com.appMusic.repository.ArtistaRepository;
 
 import java.util.Scanner;
 
 public class Principal {
+    private final ArtistaRepository repository;
     private Scanner sc = new Scanner(System.in);
+
+    public Principal(ArtistaRepository repository) {
+        this.repository = repository;
+    }
 
     public void exibeMenu() {
         System.out.println("""
@@ -21,29 +28,28 @@ public class Principal {
         int opcao = sc.nextInt();
         sc.nextLine();
 
-        while(opcao != 9) {
-            switch (opcao) {
-                case 1:
-                    cadastrasArtista();
-                    break;
-                case 2:
-                    cadastrarMusicas();
-                    break;
-                case 3:
-                    listarMusicas();
-                    break;
-                case 4:
-                    buscarMusicasPorArtista();
-                    break;
-                case 5:
-                    pesquisarDadosSobreUmArtista();
-                    break;
-                default:
-                    System.out.println("Número informado é inválido!!");
-            }
-
+        switch (opcao) {
+            case 1:
+                cadastrarArtista();
+                break;
+            case 2:
+                cadastrarMusicas();
+                break;
+            case 3:
+                listarMusicas();
+                break;
+            case 4:
+                buscarMusicasPorArtista();
+                break;
+            case 5:
+                pesquisarDadosSobreUmArtista();
+                break;
+            case 9:
+                System.out.println("Saindo...");
+                break;
+            default:
+                System.out.println("Número informado é inválido!!");
         }
-        System.out.println("Saindo...");
     }
 
     private void pesquisarDadosSobreUmArtista() {
@@ -62,16 +68,19 @@ public class Principal {
 
     }
 
-    private void cadastrasArtista() {
-        String opcaoEscolhida = "s";
+    private void cadastrarArtista() {
+        var opcaoEscolhida = "S";
 
-        while(opcaoEscolhida.equals("s")) {
+        while (opcaoEscolhida.equalsIgnoreCase("s")) {
             System.out.print("Qual o nome do artista? ");
-            String nomeArtista = sc.nextLine();
+            var nomeArtista = sc.nextLine();
             System.out.print("Informe o tipo do artista(SOLO/DUPLA/BANDA): ");
-            TipoArtista tipo = TipoArtista.valueOf(sc.nextLine().toUpperCase());
-            System.out.print("Cadastrar outro artista?(s/n): ");
+            var tipo = TipoArtista.valueOf(sc.nextLine().toUpperCase());
+            //Artista artista = new Artista(nomeArtista, tipo);
+            //repository.save(artista);
+            System.out.print("Cadastrar outro artista?(S/N): ");
             opcaoEscolhida = sc.nextLine();
         }
+        exibeMenu();
     }
 }
