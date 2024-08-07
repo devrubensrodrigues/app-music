@@ -4,6 +4,7 @@ import br.com.appMusic.model.Artista;
 import br.com.appMusic.model.Music;
 import br.com.appMusic.model.enums.TipoArtista;
 import br.com.appMusic.repository.ArtistaRepository;
+import ch.qos.logback.core.encoder.JsonEscapeUtil;
 
 import java.util.List;
 import java.util.Optional;
@@ -60,12 +61,17 @@ public class Principal {
     }
 
     private void buscarMusicasPorArtista() {
-
+        System.out.print("Qual o nome do artista? ");
+        var nomeArtista = sc.nextLine();
+        List<Music> musicas = repository.musicasPorArtista(nomeArtista);
+        musicas.forEach(System.out::println);
+        exibeMenu();
     }
 
     private void listarMusicas() {
-        var list = repository.findAll();
-        list.forEach(System.out::println);
+        var artistas = repository.findAll();
+        artistas.forEach(x -> x.getMusicas().forEach(System.out::println));
+        exibeMenu();
     }
 
     private void cadastrarMusicas() {

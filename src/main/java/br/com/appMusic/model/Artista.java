@@ -62,7 +62,7 @@ public class Artista {
     @Override
     public String toString() {
         return "Artista: " + nome + '\'' +
-                ", tipoArtista: " + tipoArtista +
-                ", musicas: " + musicas;
+                ", TipoArtista: " + tipoArtista +
+                ", Musicas: " + musicas;
     }
 }
